@@ -1,0 +1,21 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	version="1.0">
+	<persistence-unit name="hibernatePersistenceUnit"
+		transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
+		<properties>
+			<property name="hibernate.hbm2ddl.auto" value="none" />
+			<property name="hibernate.cache.use_second_level_cache">true</property>
+			<property name="hibernate.cache.use_query_cache">true</property>
+			<property name="hibernate.cache.provider_class" value="org.hibernate.cache.EhCacheProvider" />
+			<property name="hibernate.generate_statistics" value="true" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="format_sql">true</property>
+			<property name="use_sql_comments">true</property>
+		</properties>
+		<class>com.bkk.otc.dto.AppUser</class>
+		<class>com.bkk.otc.dto.Item</class>
+		<class>com.bkk.otc.dto.ItemPricing</class>
+	</persistence-unit>
+</persistence>

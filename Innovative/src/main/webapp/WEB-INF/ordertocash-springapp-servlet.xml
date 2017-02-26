@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	   		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	   		http://www.springframework.org/schema/context
+	   		http://www.springframework.org/schema/context/spring-context-3.0.xsd
+			http://www.springframework.org/schema/mvc 
+			http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+			http://www.springframework.org/schema/data/jpa
+		    http://www.springframework.org/schema/data/jpa/spring-jpa.xsd 
+		    http://www.springframework.org/schema/cache
+            http://www.springframework.org/schema/cache/spring-cache.xsd">
+	
+	<!-- Activates various annotations to be detected in bean classes -->
+	<context:annotation-config />
+	
+	<!-- Scans the classpath for annotated components that will be auto-registered as Spring beans.
+	 For example @Controller and @Service. Make sure to set the correct base-package-->
+	<context:component-scan base-package="com.bkk.otc" />
+	
+	<!-- Configures the annotation-driven Spring MVC Controller programming model.
+	Note that, with Spring 3.0, this tag works in Servlet MVC only!  -->
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.ResourceBundleViewResolver"
+		p:basename="views" />
+	<bean id="tilesConfigurer"	class="org.springframework.web.servlet.view.tiles2.TilesConfigurer"
+		p:definitions="/WEB-INF/tiles/tiles-defs.xml" />
+	<bean id="multipartResolver"
+        class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- max upload size in bytes -->
+        <property name="maxUploadSize" value="20971520" /> <!-- 20MB -->
+         
+        <!-- max size of file in memory (in bytes) -->
+        <property name="maxInMemorySize" value="1048576" /> <!-- 1MB -->
+ 
+    </bean>
+	<mvc:annotation-driven ></mvc:annotation-driven>
+
+	<mvc:resources mapping="/api/**" location="/api/" cache-period="31556926"/>
+	<mvc:resources mapping="/css/**" location="/css/" cache-period="31556926"/>
+	<mvc:resources mapping="/fonts/**" location="/fonts/" cache-period="31556926"/>
+	<mvc:resources mapping="/img/**" location="/img/" cache-period="31556926"/>
+	<mvc:resources mapping="/js/**" location="/js/" cache-period="31556926"/>
+	<mvc:resources mapping="/l10n/**" location="/l10n/" cache-period="31556926"/>
+	<mvc:resources mapping="/libs/**" location="/libs/" cache-period="31556926"/>
+	
+	<!-- <bean class="com.mangofactory.swagger.configuration.SpringSwaggerConfig" /> -->
+	
+	 <!-- Load Hibernate related configuration -->
+	<import resource="ordertocash-hibernate-context.xml" />
+	<jpa:repositories base-package="com.bkk.otc" entity-manager-factory-ref="entityManagerFactory" transaction-manager-ref="transactionManager"/>
+
+	
+</beans>

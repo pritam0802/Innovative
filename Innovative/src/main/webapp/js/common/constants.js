@@ -1,0 +1,12 @@
+var SysCodeTypeConstants={
+		"CARCASE":"10",
+		"NECESSARY_ACCESSORIES":"20",
+		"ADDON_ACCESSORIES":"30",
+		"HARDWARE":"40",
+		"SHUTTER":"50",
+		"PROFILE_GLASS_SHUTTER":"60",
+		"SHELVE":"70",
+		"FULL_MODULAR":"10",
+		"SEMI_MODULAR":"20"
+		
+	}
